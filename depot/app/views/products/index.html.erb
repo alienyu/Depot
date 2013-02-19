@@ -1,25 +1,28 @@
-<h1>Listing products</h1>
+<div id = "product-list">
+  <h1>Listing products</h1>
 
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Description</th>
-    <th>Image url</th>
-    <th>Price</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+  <table>
+  <% @products.each do |product| %>
+  <!--alternate show each row's background color-->
+  <tr class="<%= cycle('list-line-odd', 'list-line-event') %>">
+    <td>
+      <%= image_tag(product.image_url, :class => 'list-image') %>
+    </td>
+    <td class="list-description">
+      <dl>
+        <dt><%= product.title %></dt>
+        <!--use truncate to restrict description just shown 80 chars and use strip_tags to remove html tags-->
+        <dd><%= truncate(strip_tags(product.description), :length => 80) %></dd>
+      </dl>
+    </td>
 
-<% @products.each do |product| %>
-  <tr>
-    <td><%= product.title %></td>
-    <td><%= product.description %></td>
-    <td><%= product.image_url %></td>
-    <td><%= product.price %></td>
-    <td><%= link_to 'Show', product %></td>
-    <td><%= link_to 'Edit', edit_product_path(product) %></td>
-    <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td class="list-actions">
+      <%= link_to 'Show', product %><br/>
+      <%= link_to 'Edit', edit_product_path(product) %><br/>
+      <%= link_to 'Destroy', product,
+                  :method => :delete,
+                  :confirm => 'Are you sure?' %>
+    </td>
   </tr>
 <% end %>
 </table>
@@ -27,3 +30,5 @@
 <br />
 
 <%= link_to 'New Product', new_product_path %>
+
+</div>
