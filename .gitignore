@@ -1,1 +1,7 @@
 .DS_Store
+/depot/app/.idea/
+.xml
+encodings.xml
+/depot/.idea/misc.xml
+*.xml
+/depot/.idea/workspace.xml
